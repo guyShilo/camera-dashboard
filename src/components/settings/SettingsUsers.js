@@ -1,16 +1,16 @@
+import { useState } from 'react';
 import {
-  TextField,
+  Box,
   Button,
   Card,
-  MenuItem,
-  Box,
-  Divider,
+  CardContent,
   CardHeader,
-  CardContent
+  Divider,
+  MenuItem,
+  TextField
 } from '@material-ui/core';
-import { useState } from 'react';
 
-const SettingsNotifications = (props) => {
+const SettingsPassword = (props) => {
   const [values, setValues] = useState({
     password: '',
     confirm: ''
@@ -27,45 +27,37 @@ const SettingsNotifications = (props) => {
     <form {...props}>
       <Card>
         <CardHeader
-          subheader="Update camera interval time"
-          title="Camera Interval"
+          subheader="Update password"
+          title="Password"
         />
         <Divider />
         <CardContent>
-
           <TextField
             fullWidth
-            label="Set camera interval"
+            label="Password"
+            margin="normal"
+            name="password"
+            onChange={handleChange}
+            type="password"
+            value={values.password}
+            variant="outlined"
+          />
+          <TextField
+            fullWidth
+            label="Confirm password"
             margin="normal"
             name="confirm"
             onChange={handleChange}
+            type="password"
             value={values.confirm}
             variant="outlined"
             select
           >
-            <MenuItem value="1">
-              One minute
+            <MenuItem value="ON">
+              ON
             </MenuItem>
-            <MenuItem value="5">
-              5 minutes
-            </MenuItem>
-            <MenuItem value="10">
-              10 minutes
-            </MenuItem>
-            <MenuItem value="15">
-              15 minutes
-            </MenuItem>
-            <MenuItem value="30">
-              30 minutes
-            </MenuItem>
-            <MenuItem value="60">
-              1 hour
-            </MenuItem>
-            <MenuItem value="240">
-              4 hours
-            </MenuItem>
-            <MenuItem value="1440">
-              24 hours
+            <MenuItem value="OFF">
+              OFF
             </MenuItem>
           </TextField>
         </CardContent>
@@ -89,4 +81,4 @@ const SettingsNotifications = (props) => {
   );
 };
 
-export default SettingsNotifications;
+export default SettingsPassword;

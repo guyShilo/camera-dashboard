@@ -23,12 +23,6 @@ import {
 } from 'react-feather';
 import NavItem from './NavItem';
 
-const user = {
-  avatar: '/static/images/avatars/avatar_6.png',
-  jobTitle: 'Senior Developer',
-  name: 'Katarina Smith'
-};
-
 const items = [
   {
     href: '/app/dashboard',
@@ -36,14 +30,14 @@ const items = [
     title: 'Dashboard'
   },
   {
-    href: '/app/customers',
+    href: '/app/cameras',
     icon: UsersIcon,
-    title: 'Customers'
+    title: 'Cameras status'
   },
   {
-    href: '/app/products',
+    href: '/app/events',
     icon: ShoppingBagIcon,
-    title: 'Products'
+    title: 'Events log'
   },
   {
     href: '/app/account',
@@ -59,11 +53,6 @@ const items = [
     href: '/login',
     icon: LockIcon,
     title: 'Login'
-  },
-  {
-    href: '/register',
-    icon: UserPlusIcon,
-    title: 'Register'
   },
   {
     href: '/404',
@@ -89,37 +78,6 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
         height: '100%'
       }}
     >
-      <Box
-        sx={{
-          alignItems: 'center',
-          display: 'flex',
-          flexDirection: 'column',
-          p: 2
-        }}
-      >
-        <Avatar
-          component={RouterLink}
-          src={user.avatar}
-          sx={{
-            cursor: 'pointer',
-            width: 64,
-            height: 64
-          }}
-          to="/app/account"
-        />
-        <Typography
-          color="textPrimary"
-          variant="h5"
-        >
-          {user.name}
-        </Typography>
-        <Typography
-          color="textSecondary"
-          variant="body2"
-        >
-          {user.jobTitle}
-        </Typography>
-      </Box>
       <Divider />
       <Box sx={{ p: 2 }}>
         <List>

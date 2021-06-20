@@ -10,15 +10,15 @@ import {
   TextField
 } from '@material-ui/core';
 
-const SettingsPassword = (props) => {
-  const [values, setValues] = useState({
-    user: '',
+const SettingsCamera = (props) => {
+  const [activeCamera, setActiveCamera] = useState({
+    camera: '',
     confirm: ''
   });
 
   const handleChange = (event) => {
-    setValues({
-      ...values,
+    setActiveCamera({
+      ...activeCamera,
       [event.target.name]: event.target.value
     });
   };
@@ -27,19 +27,18 @@ const SettingsPassword = (props) => {
     <form {...props}>
       <Card>
         <CardHeader
-          subheader="Update user"
-          title="User"
+          subheader="Update camera"
+          title="Camera"
         />
         <Divider />
         <CardContent>
           <TextField
             fullWidth
-            label="Email"
+            label="Camera number"
             margin="normal"
-            name="user"
+            name="camera"
             onChange={handleChange}
-            type="user"
-            value={values.user}
+            value={activeCamera.camera}
             variant="outlined"
           />
           <TextField
@@ -48,7 +47,8 @@ const SettingsPassword = (props) => {
             margin="normal"
             name="confirm"
             onChange={handleChange}
-            value={values.confirm}
+            type="password"
+            value={activeCamera.confirm}
             variant="outlined"
             select
           >
@@ -80,4 +80,4 @@ const SettingsPassword = (props) => {
   );
 };
 
-export default SettingsPassword;
+export default SettingsCamera;

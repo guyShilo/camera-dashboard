@@ -17,7 +17,7 @@ import {
 } from '@material-ui/core';
 import getInitials from 'src/utils/getInitials';
 
-const CustomerListResults = ({ customers, ...rest }) => {
+const ProductListResults = ({ customers, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
@@ -63,11 +63,11 @@ const CustomerListResults = ({ customers, ...rest }) => {
   };
   // {
   //   camID: 1,
-  //   camIP: '192.168.0.111',
-  //   camPort: '8080',
-  //   isActive: true,
-  //   location: "Nadav's Office",
-  //   type: 'PiCam'
+  //   datetime: '2021-06-08T13:48:47Z[UTC]',
+  //   numOfFaces: 1,
+  //   numOfFacesWithMask: 0,
+  //   numOfFacesWithMaskCovering: 0,
+  //   numOfFacesWithoutMaskCovering: 1
   // },
   return (
     <Card {...rest}>
@@ -91,19 +91,19 @@ const CustomerListResults = ({ customers, ...rest }) => {
                   camID
                 </TableCell>
                 <TableCell>
-                  camIP
+                  datetime
                 </TableCell>
                 <TableCell>
-                  camPort
+                  Number of faces
                 </TableCell>
                 <TableCell>
-                  isActive
+                  Number of faces with mask
                 </TableCell>
                 <TableCell>
-                  location
+                  Number of faces with mask covering their faces
                 </TableCell>
                 <TableCell>
-                  type
+                  Number of faces without mask covering their faces
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -125,19 +125,19 @@ const CustomerListResults = ({ customers, ...rest }) => {
                     {customer.camID}
                   </TableCell>
                   <TableCell>
-                    {customer.camIP}
+                    {moment(customer.datetime).format('DD/MM/YYYY hh:ss')}
                   </TableCell>
                   <TableCell>
-                    {customer.camPort}
+                    {`${customer.numOfFaces}`}
                   </TableCell>
                   <TableCell>
-                    {customer.isActive ? 'active' : 'Not active'}
+                    {customer.numOfFacesWithMask}
                   </TableCell>
                   <TableCell>
-                    {customer.location}
+                    {customer.numOfFacesWithMaskCovering}
                   </TableCell>
                   <TableCell>
-                    {customer.type}
+                    {customer.numOfFacesWithoutMaskCovering}
                   </TableCell>
                 </TableRow>
               ))}
@@ -158,8 +158,8 @@ const CustomerListResults = ({ customers, ...rest }) => {
   );
 };
 
-CustomerListResults.propTypes = {
+ProductListResults.propTypes = {
   customers: PropTypes.array.isRequired
 };
 
-export default CustomerListResults;
+export default ProductListResults;

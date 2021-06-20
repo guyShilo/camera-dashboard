@@ -10,15 +10,15 @@ import {
   TextField
 } from '@material-ui/core';
 
-const SettingsPassword = (props) => {
-  const [values, setValues] = useState({
-    user: '',
+const SettingsPermission = (props) => {
+  const [permissions, setPermissions] = useState({
+    permissison: '',
     confirm: ''
   });
 
   const handleChange = (event) => {
-    setValues({
-      ...values,
+    setPermissions({
+      ...permissions,
       [event.target.name]: event.target.value
     });
   };
@@ -27,19 +27,18 @@ const SettingsPassword = (props) => {
     <form {...props}>
       <Card>
         <CardHeader
-          subheader="Update user"
-          title="User"
+          subheader="Update permission"
+          title="Permission"
         />
         <Divider />
         <CardContent>
           <TextField
             fullWidth
-            label="Email"
+            label="Permission"
             margin="normal"
-            name="user"
+            name="permission"
             onChange={handleChange}
-            type="user"
-            value={values.user}
+            value={permissions.password}
             variant="outlined"
           />
           <TextField
@@ -48,7 +47,7 @@ const SettingsPassword = (props) => {
             margin="normal"
             name="confirm"
             onChange={handleChange}
-            value={values.confirm}
+            value={permissions.confirm}
             variant="outlined"
             select
           >
@@ -80,4 +79,4 @@ const SettingsPassword = (props) => {
   );
 };
 
-export default SettingsPassword;
+export default SettingsPermission;
