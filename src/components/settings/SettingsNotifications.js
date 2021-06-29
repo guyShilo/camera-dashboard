@@ -9,10 +9,11 @@ import {
   CardContent
 } from '@material-ui/core';
 import { useState } from 'react';
-
+const headers = {
+  'Authorization': `Bearer ${localStorage.getItem('token')}`
+}
 const SettingsNotifications = (props) => {
   const [values, setValues] = useState({
-    password: '',
     confirm: ''
   });
 
@@ -22,6 +23,15 @@ const SettingsNotifications = (props) => {
       [event.target.name]: event.target.value
     });
   };
+
+  const handleRequest = async () => {
+    const {data} = await axios.get(`http://192.168.0.160:8080/GlassfishPiCamREST/api/changeInterval?IntervalMinutes=${confirm}`, {headers});
+    if(data.msg){
+      alert('Interval updated')
+    } else if (data.err) {
+      alert(data.err)
+    }
+  }
 
   return (
     <form {...props}>
@@ -80,6 +90,7 @@ const SettingsNotifications = (props) => {
           <Button
             color="primary"
             variant="contained"
+            onClick={async () => handleRequest()}
           >
             Update
           </Button>

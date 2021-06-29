@@ -17,8 +17,11 @@ const ProductListToolbar = (props) => (
         justifyContent: 'flex-end'
       }}
     >
-      <Button>
-        Import
+      <Button onClick={() =>  props.setResults(props.customers.filter(customer => customer.numberoffaces - customer.numberoffaceswithmask >= 1))}>
+        Viloations is last 24 hours
+      </Button>
+      <Button onClick={() =>  props.setResults(props.customers.filter(customer => customer.numoffaces - customer.numoffaceswithmask) > 0)}>
+        Without masks incidents in last 24 hours
       </Button>
       <Button sx={{ mx: 1 }}>
         Export

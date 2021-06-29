@@ -9,10 +9,12 @@ import {
   MenuItem,
   TextField
 } from '@material-ui/core';
-
+const headers = {
+  'Authorization': `Bearer ${localStorage.getItem('token')}`
+}
 const SettingsPassword = (props) => {
   const [values, setValues] = useState({
-    user: '',
+    email: '',
     confirm: ''
   });
 
@@ -22,6 +24,15 @@ const SettingsPassword = (props) => {
       [event.target.name]: event.target.value
     });
   };
+
+  const handleRequest = async () => {
+    const {data} = await axios.get(`http://192.168.0.160:8080/GlassfishPiCamREST/api/changeActiveStatusUser?email=${email}&addOrRemove=${confirm}`, {headers});
+    if(data.msg){
+      alert('Camera updated')
+    } else if (data.err) {
+      alert(data.err)
+    }
+  }
 
   return (
     <form {...props}>
@@ -36,10 +47,10 @@ const SettingsPassword = (props) => {
             fullWidth
             label="Email"
             margin="normal"
-            name="user"
+            name="email"
             onChange={handleChange}
-            type="user"
-            value={values.user}
+            type="email"
+            value={values.email}
             variant="outlined"
           />
           <TextField
@@ -71,6 +82,7 @@ const SettingsPassword = (props) => {
           <Button
             color="primary"
             variant="contained"
+            onClick={async () => handleRequest()}
           >
             Update
           </Button>

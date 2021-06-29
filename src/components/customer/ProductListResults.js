@@ -105,6 +105,9 @@ const ProductListResults = ({ customers, ...rest }) => {
                 <TableCell>
                   Number of faces without mask covering their faces
                 </TableCell>
+                <TableCell>
+                  File Name
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -122,22 +125,25 @@ const ProductListResults = ({ customers, ...rest }) => {
                     /> */}
                   </TableCell>
                   <TableCell>
-                    {customer.camID}
+                    {customer.camid}
                   </TableCell>
                   <TableCell>
                     {moment(customer.datetime).format('DD/MM/YYYY hh:ss')}
                   </TableCell>
                   <TableCell>
-                    {`${customer.numOfFaces}`}
+                    {`${customer.numoffaces}`}
                   </TableCell>
                   <TableCell>
-                    {customer.numOfFacesWithMask}
+                    {customer.numoffaceswithmask}
                   </TableCell>
                   <TableCell>
-                    {customer.numOfFacesWithMaskCovering}
+                    {customer.numoffaceswithmaskcovering}
                   </TableCell>
                   <TableCell>
-                    {customer.numOfFacesWithoutMaskCovering}
+                    {customer.numoffaceswithoutmaskcovering}
+                  </TableCell>
+                  <TableCell>
+                    {customer.filename}
                   </TableCell>
                 </TableRow>
               ))}

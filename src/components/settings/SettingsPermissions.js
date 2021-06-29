@@ -9,10 +9,13 @@ import {
   MenuItem,
   TextField
 } from '@material-ui/core';
-
+const headers = {
+  'Authorization': `Bearer ${localStorage.getItem('token')}`
+}
 const SettingsPermission = (props) => {
   const [permissions, setPermissions] = useState({
-    permissison: '',
+    camId: '',
+    email: '',
     confirm: ''
   });
 
@@ -22,6 +25,15 @@ const SettingsPermission = (props) => {
       [event.target.name]: event.target.value
     });
   };
+
+  const handleRequest = async () => {
+    const {data} = await axios.get(`http://192.168.0.160:8080/GlassfishPiCamREST/api/Permission?email=${email}&addOrRemove=${confirm}&camID=${camId}`, {headers});
+    if(data.msg){
+      alert('Camera updated')
+    } else if (data.err) {
+      alert(data.err)
+    }
+  }
 
   return (
     <form {...props}>
@@ -34,11 +46,20 @@ const SettingsPermission = (props) => {
         <CardContent>
           <TextField
             fullWidth
-            label="Permission"
+            label="Camera ID"
             margin="normal"
-            name="permission"
+            name="camId"
             onChange={handleChange}
-            value={permissions.password}
+            value={permissions.camId}
+            variant="outlined"
+          />
+          <TextField
+            fullWidth
+            label="Email"
+            margin="normal"
+            name="email"
+            onChange={handleChange}
+            value={permissions.email}
             variant="outlined"
           />
           <TextField
@@ -70,6 +91,7 @@ const SettingsPermission = (props) => {
           <Button
             color="primary"
             variant="contained"
+            onClick={async () => handleRequest()}
           >
             Update
           </Button>

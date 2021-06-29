@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -21,6 +21,7 @@ const CustomerListResults = ({ customers, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
+  const [results, setResults] = useState([]);
 
   const handleSelectAll = (event) => {
     let newSelectedCustomerIds;
@@ -61,6 +62,10 @@ const CustomerListResults = ({ customers, ...rest }) => {
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
   };
+
+  // const handleResultsFilter = (results) => {
+  //   return results;
+  // };
   // {
   //   camID: 1,
   //   camIP: '192.168.0.111',
@@ -68,7 +73,7 @@ const CustomerListResults = ({ customers, ...rest }) => {
   //   isActive: true,
   //   location: "Nadav's Office",
   //   type: 'PiCam'
-  // },
+  // }
   return (
     <Card {...rest}>
       <PerfectScrollbar>
@@ -122,16 +127,16 @@ const CustomerListResults = ({ customers, ...rest }) => {
                     /> */}
                   </TableCell>
                   <TableCell>
-                    {customer.camID}
+                    {customer.camid}
                   </TableCell>
                   <TableCell>
-                    {customer.camIP}
+                    {customer.camip}
                   </TableCell>
                   <TableCell>
-                    {customer.camPort}
+                    {customer.camport}
                   </TableCell>
                   <TableCell>
-                    {customer.isActive ? 'active' : 'Not active'}
+                    {customer.isactive ? 'Active' : 'Not active'}
                   </TableCell>
                   <TableCell>
                     {customer.location}
@@ -159,7 +164,7 @@ const CustomerListResults = ({ customers, ...rest }) => {
 };
 
 CustomerListResults.propTypes = {
-  customers: PropTypes.array.isRequired
+  customers: PropTypes.array.isRequired,
 };
 
 export default CustomerListResults;

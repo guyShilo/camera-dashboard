@@ -9,7 +9,9 @@ import {
   MenuItem,
   TextField
 } from '@material-ui/core';
-
+const headers = {
+  'Authorization': `Bearer ${localStorage.getItem('token')}`
+}
 const SettingsCamera = (props) => {
   const [activeCamera, setActiveCamera] = useState({
     camera: '',
@@ -23,6 +25,14 @@ const SettingsCamera = (props) => {
     });
   };
 
+  const handleRequest = async () => {
+    const {data} = await axios.get(`http://192.168.0.160:8080/GlassfishPiCamREST/api/changeActiveStatusCamera?camID=${camera}&addOrRemove=${confirm}`, {headers});
+    if(data.msg){
+      alert('Camera updated')
+    } else if (data.err) {
+      alert(data.err)
+    }
+  }
   return (
     <form {...props}>
       <Card>
@@ -71,6 +81,7 @@ const SettingsCamera = (props) => {
           <Button
             color="primary"
             variant="contained"
+            onClick={async () => await handleRequest()}
           >
             Update
           </Button>

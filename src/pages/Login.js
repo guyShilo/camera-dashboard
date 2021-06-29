@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core';
 import FacebookIcon from 'src/icons/Facebook';
 import GoogleIcon from 'src/icons/Google';
+import axios from 'axios';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -41,8 +42,23 @@ const Login = () => {
               email: Yup.string().email('Must be a valid email').max(50).required('Email is required'),
               password: Yup.string().max(255).required('Password is required')
             })}
-            onSubmit={() => {
-              navigate('/app/dashboard', { replace: true });
+            onSubmit={(values) => {
+              const { data, errors } = axios.get(`http://nadav:8080/GlassfishPiCamREST/api/login?email=${values.email}&password=${values.password}`);
+              if (errors) {
+                console.log(errors);
+              }
+
+              try {
+                const token = data.authorization;
+                if (data.error) {
+                  console.error('Data.error');
+                }
+
+                localStorage.setItem('token', token);
+                navigate('/app/dashboard', { replace: true });
+              } catch (error) {
+                console.log(error);
+              }
             }}
           >
             {({
